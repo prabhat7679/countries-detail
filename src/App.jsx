@@ -8,6 +8,7 @@ function App() {
   const [countries, setcountriesData] = useState([])
   
   const [region, setRegion] = useState('');
+
   const [searchResult, setSearchResult] = useState('');
 
 
@@ -24,6 +25,32 @@ function App() {
       });
   }
 
+//   function NumberPerSubregion()
+// {
+//     const subRegionData = countries.reduce((acc,area)=>{
+
+//         let newObj={};
+
+//         if(acc[area.region] === undefined){
+//             acc[area.region]=newObj;
+//         }
+        
+//         if(acc[area.region][area.subregion]===undefined){
+    
+//             acc[area.region][area.subregion]= [];
+           
+
+//         }else{
+//             acc[area.region][area.subregion].push([area.subregion]);
+           
+//          }
+    
+//         return acc;
+//      },{})
+//      console.log(subRegionData)
+//     }
+
+//     NumberPerSubregion();
 
   useEffect(() => {
     fetchData();
@@ -38,10 +65,12 @@ function App() {
     return country.name.common.toLowerCase().includes(searchResult.toLowerCase());
   })
 
+  
+
   return (
     <>
       <Header />
-      <Navbar setRegion={setRegion} setSearchResult={setSearchResult} />
+      <Navbar setRegion={setRegion} countries={countries} setSearchResult={setSearchResult} />
       <Countries countriesData={searchedCountry} />
 
       {/* {countries.map((item)=>{

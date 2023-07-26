@@ -10,7 +10,8 @@ function App() {
   const [searchResult, setSearchResult] = useState('');
   const [sortingOrder, setSortingOrder] = useState('');
   const [subregion, setSubRegion] = useState([]);
-
+  const [dataOfSubRegion, setDataOfSubRegion] = useState([])
+  const [error, setError]= ('');
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all')
@@ -22,6 +23,7 @@ function App() {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        setError(error);
       });
   }, []);
 
@@ -32,26 +34,36 @@ function App() {
 
   //     find subRegion form the seperate Region 
   let subRegionData = seperateRegion.reduce((acc, country) => {
-    let subRegion = country.subregion;
 
-    if (subRegion in acc) {
-      acc[subRegion].push(country);
+    let findSubRegion = country.subregion;
+
+    if (findSubRegion in acc) {
+      acc[findSubRegion].push(country);
     } else {
-      acc[subRegion] = [country];
+      acc[findSubRegion] = [country];
     }
     return acc;
   }, {});
 
-  // console.log(subRegionData)  
+
   //when region change useEffect called and it will set setSubRegion
   useEffect(() => {
     setSubRegion(Object.keys(subRegionData));
-    // console.log('subRegions', setSubRegion);
   }, [region])
+
+  //    country inside subregion 
+
+  let dataSubRegion = seperateRegion.filter((country) => {
+    if (country.subregion == undefined) {
+      return true;
+    } else {
+      return country.subregion.includes(dataOfSubRegion)
+    }
+  })
 
 
   // search bar 
-  let searchedCountry = seperateRegion.filter((country) => {
+  let searchedCountry = dataSubRegion.filter((country) => {
     return country.name.common.toLowerCase().includes(searchResult.toLowerCase());
   })
 
@@ -80,12 +92,15 @@ function App() {
 
   return (
     <>
+   
       <div className="main-container">
         <Header />
         <Navbar
           setRegion={setRegion}
           setSearchResult={setSearchResult}
           setSortingOrder={setSortingOrder}
+          subregion={subregion}
+          setDataOfSubRegion={setDataOfSubRegion}
         />
         <Countries countriesData={searchedCountry} />
       </div>

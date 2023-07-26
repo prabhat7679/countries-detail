@@ -3,13 +3,18 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+.main-container{
+  display: flex;
+  flex-direction: column;
+  
+}
 .container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 5em;
+  /* align-items: center; */
+  justify-content: space-around;
+  padding: 2em;
+ 
 }
 .headerClass {
   width: 100vw;
@@ -36,20 +41,23 @@
   box-shadow: 0px 1px 3px gray;
 }
 .selectRegion,
-.selectSorting {
+.selectSorting,
+.selectSubRegion {
   height: 30px;
   width: 15vw;
   border: none;
   box-shadow: 0px 1px 3px gray;
 }
 .country-card {
-  box-shadow: 0px 1px 3px gray;
+  box-shadow: 0px 2px 3px  gray;
   border-radius: 10px;
-  width: 20vw;
-  height: 40vh;
+  width: 18vw;
+  /* height: auto; */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-bottom: 2em; 
+  
 }
 .imageClass {
   height: 10vw;

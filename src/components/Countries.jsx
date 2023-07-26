@@ -8,7 +8,7 @@ export default function Countries({ countriesData }) {
             {<div className='container'>
                 {countriesData.map(country => (
                     <CountryCard
-                        key={country.common}
+                        key={country.name.common}
                         img={country.flags.png}
                         name={country.name.common}
                         population={country.population}

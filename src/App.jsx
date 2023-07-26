@@ -10,14 +10,14 @@ function App() {
   const [searchResult, setSearchResult] = useState('');
   const [sortingOrder, setSortingOrder] = useState('');
 
-  
+
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all')
       .then(data => {
         return data.json();
       })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setcountriesData(data);
       })
       .catch(error => {

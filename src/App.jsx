@@ -10,6 +10,7 @@ function App() {
   const [region, setRegion] = useState('');
 
   const [searchResult, setSearchResult] = useState('');
+  const [sortingOrder, setSortingOrder] = useState('');
 
 
   const fetchData = () => {
@@ -25,52 +26,53 @@ function App() {
       });
   }
 
-//   function NumberPerSubregion()
-// {
-//     const subRegionData = countries.reduce((acc,area)=>{
-
-//         let newObj={};
-
-//         if(acc[area.region] === undefined){
-//             acc[area.region]=newObj;
-//         }
-        
-//         if(acc[area.region][area.subregion]===undefined){
-    
-//             acc[area.region][area.subregion]= [];
-           
-
-//         }else{
-//             acc[area.region][area.subregion].push([area.subregion]);
-           
-//          }
-    
-//         return acc;
-//      },{})
-//      console.log(subRegionData)
-//     }
-
-//     NumberPerSubregion();
-
   useEffect(() => {
     fetchData();
   }, []);
 
+//      seperate by region 
   let seperateRegion = countries.filter((country) => {
     return country.region.toLowerCase().includes(region.toLowerCase());
   })
 
-
+//     search bar 
   let searchedCountry = seperateRegion.filter((country) => {
     return country.name.common.toLowerCase().includes(searchResult.toLowerCase());
   })
 
+  // sorting function 
+  if(sortingOrder !== ''){
+    searchedCountry.sort((country1, country2)=>{
+      if(sortingOrder == 'population-asc')
+      {
+        
+        return (country1.population - country2.population);
+        
+      }else if(sortingOrder == 'population-desc')
+      {
+       
+        return (country2.population - country1.population);
+       
+      }else if(sortingOrder == 'area-asc')
+      {
+       
+        return (country1.area - country2.area);
+       
+      }else if(sortingOrder == 'area-desc')
+      {
+       
+        return (country2.area - country1.area);
+       
+      }
+    })
+  }
+ 
   
 
   return (
     <>
       <Header />
-      <Navbar setRegion={setRegion} countries={countries} setSearchResult={setSearchResult} />
+      <Navbar setRegion={setRegion}  setSearchResult={setSearchResult} setSortingOrder={setSortingOrder}/>
       <Countries countriesData={searchedCountry} />
 
       {/* {countries.map((item)=>{
@@ -80,3 +82,4 @@ function App() {
 }
 
 export default App;
+

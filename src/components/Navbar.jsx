@@ -17,7 +17,6 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder }) 
   }
 
 
-
   return (
     <nav className='navbar'>
       <input className='searchBaR'
@@ -34,7 +33,8 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder }) 
         <option value='Oceania'>Oceania</option>
       </select>
 
-      <select className="selectSorting"  onChange={event => onSortChange(event.target.value)}>
+
+      <select className="selectSorting" onChange={event => onSortChange(event.target.value)}>
         <option value=''>Sort</option>
         <option value='population-asc'>Sort by population (Ascending)</option>
         <option value='population-desc'>Sort by population (Descending)</option>

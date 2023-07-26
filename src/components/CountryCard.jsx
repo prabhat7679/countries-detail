@@ -8,9 +8,9 @@ function CountryCard({ img, name, population, region, capital }) {
             </div>
             <div className="allData">
                 <h2> Name :{name}</h2>
-                <h5>Population :{population}</h5>
-                <h5>Region: {region}</h5>
-                <h5>Capital :{capital}</h5>
+                <h4>Population :{population}</h4>
+                <h4>Region: {region}</h4>
+                <h4>Capital :{capital}</h4>
             </div>
 
         </div>

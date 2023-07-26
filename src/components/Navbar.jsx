@@ -1,12 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
 
 export default function Navbar({ setRegion, setSearchResult, setSortingOrder }) {
 
   function onSearch(value) {
     setSearchResult(value)
   }
-
 
   function onRegionFilter(value) {
     setRegion(value);
@@ -15,7 +13,6 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder }) 
   function onSortChange(value) {
     setSortingOrder(value);
   }
-
 
   return (
     <nav className='navbar'>

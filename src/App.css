@@ -1,77 +1,69 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-.container{
- display: flex; 
- flex-wrap: wrap;
- align-items: center;
- justify-content: center;
- /* padding:3em; */
- gap: 5em;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
 }
-.headerClass{
+.headerClass {
   width: 100vw;
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2em;
-  box-shadow: 0px 1px 3px  gray;
-  /* position: fixed; */
+  box-shadow: 0px 1px 3px gray;
 }
-.navbar{
+.navbar {
   width: 100vw;
   height: 70px;
-  /* background-color: aquamarine; */
   display: flex;
- align-items: center;
- justify-content: space-between;
- padding: 2em;
- 
- /* position: fixed; */
-  
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
 }
-.searchBaR{
+.searchBaR {
   height: 30px;
   width: 22vw;
   padding: 10px;
   border: none;
-  box-shadow: 0px 1px 3px  gray;
+  box-shadow: 0px 1px 3px gray;
 }
-.selectRegion,.selectSorting{
+.selectRegion,
+.selectSorting {
   height: 30px;
   width: 15vw;
-  /* padding: 10px; */
   border: none;
-  box-shadow: 0px 1px 3px  gray;
+  box-shadow: 0px 1px 3px gray;
 }
-.country-card{
-  box-shadow: 0px 1px 3px  gray;
-  /* border: 1px solid black; */
+.country-card {
+  box-shadow: 0px 1px 3px gray;
   border-radius: 10px;
   width: 20vw;
   height: 40vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  
 }
-.imageClass{
-  /* width: 20vw; */
+.imageClass {
   height: 10vw;
 }
-.imageClass img{
+.imageClass img {
   width: 100%;
   height: 10vw;
   object-fit: fill;
 }
-.allData{
+.allData {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   padding: 2em;
+  gap: 1em;
 }

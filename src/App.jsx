@@ -5,10 +5,11 @@ import Navbar from './components/Navbar'
 import Header from './components/Header'
 
 function App() {
-  const [countries, setcountriesData] = useState([])
+  const [countries, setcountriesData] = useState([]);
   const [region, setRegion] = useState('');
   const [searchResult, setSearchResult] = useState('');
   const [sortingOrder, setSortingOrder] = useState('');
+  const [subregion, setSubRegion] = useState([]);
 
 
   useEffect(() => {
@@ -17,7 +18,6 @@ function App() {
         return data.json();
       })
       .then(data => {
-        // console.log(data)
         setcountriesData(data);
       })
       .catch(error => {
@@ -25,14 +25,32 @@ function App() {
       });
   }, []);
 
-  //      seperate by region 
+  //  seperate by region 
   let seperateRegion = countries.filter((country) => {
     return country.region.toLowerCase().includes(region.toLowerCase());
   })
 
-  // console.log(seperateRegion);
+  //     find subRegion form the seperate Region 
+  let subRegionData = seperateRegion.reduce((acc, country) => {
+    let subRegion = country.subregion;
 
-  //     search bar 
+    if (subRegion in acc) {
+      acc[subRegion].push(country);
+    } else {
+      acc[subRegion] = [country];
+    }
+    return acc;
+  }, {});
+
+  // console.log(subRegionData)  
+  //when region change useEffect called and it will set setSubRegion
+  useEffect(() => {
+    setSubRegion(Object.keys(subRegionData));
+    // console.log('subRegions', setSubRegion);
+  }, [region])
+
+
+  // search bar 
   let searchedCountry = seperateRegion.filter((country) => {
     return country.name.common.toLowerCase().includes(searchResult.toLowerCase());
   })
@@ -62,13 +80,15 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <Navbar
-        setRegion={setRegion}
-        setSearchResult={setSearchResult}
-        setSortingOrder={setSortingOrder}
-      />
-      <Countries countriesData={searchedCountry} />
+      <div className="main-container">
+        <Header />
+        <Navbar
+          setRegion={setRegion}
+          setSearchResult={setSearchResult}
+          setSortingOrder={setSortingOrder}
+        />
+        <Countries countriesData={searchedCountry} />
+      </div>
     </>
   )
 }

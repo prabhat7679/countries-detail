@@ -3,6 +3,7 @@ import './App.css'
 import Countries from './components/Countries'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
+import Loader from './components/Loader'
 
 function App() {
   const [countries, setcountriesData] = useState([]);
@@ -11,7 +12,9 @@ function App() {
   const [sortingOrder, setSortingOrder] = useState('');
   const [subregion, setSubRegion] = useState([]);
   const [dataOfSubRegion, setDataOfSubRegion] = useState([])
-  const [error, setError]= ('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all')
@@ -20,11 +23,16 @@ function App() {
       })
       .then(data => {
         setcountriesData(data);
+
       })
       .catch(error => {
         console.error('Error fetching data:', error);
         setError(error);
-      });
+
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }, []);
 
   //  seperate by region 
@@ -92,17 +100,23 @@ function App() {
 
   return (
     <>
-   
+
+
       <div className="main-container">
-        <Header />
-        <Navbar
-          setRegion={setRegion}
-          setSearchResult={setSearchResult}
-          setSortingOrder={setSortingOrder}
-          subregion={subregion}
-          setDataOfSubRegion={setDataOfSubRegion}
-        />
-        <Countries countriesData={searchedCountry} />
+        {loading ? (<Loader />) :
+          (
+            <>
+              {countries.length === 0 ? ('No Data Found') :
+                <><Header />
+                  <Navbar
+                    setRegion={setRegion}
+                    setSearchResult={setSearchResult}
+                    setSortingOrder={setSortingOrder}
+                    subregion={subregion}
+                    setDataOfSubRegion={setDataOfSubRegion}
+                  />
+                  <Countries countriesData={searchedCountry} /></>}
+            </>)}
       </div>
     </>
   )

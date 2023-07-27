@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Navbar({ setRegion, setSearchResult, setSortingOrder,subregion,setDataOfSubRegion}) {
+export default function Navbar({ setRegion, setSearchResult, setSortingOrder, subregion, setDataOfSubRegion }) {
 
   function onSearch(value) {
     setSearchResult(value)
@@ -8,6 +8,7 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder,sub
 
   function onRegionFilter(value) {
     setRegion(value);
+
   }
 
   function onSubRegionFilter(value) {
@@ -18,7 +19,7 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder,sub
     setSortingOrder(value);
   }
 
- 
+
 
   return (
     <nav className='navbar'>
@@ -37,14 +38,14 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder,sub
       </select>
 
 
-      <select className="selectSubRegion"  onChange={event => onSubRegionFilter(event.target.value)}>
+      <select className="selectSubRegion" onChange={event => onSubRegionFilter(event.target.value)}>
         <option value=''>Filter by SubRegion</option>
-        {subregion.map((region, index)=>{
-            // console.log(region);
-           return <option key={index} value={region}>{region}</option>
+        {subregion.map((region, index) => {
+          // console.log(region);
+          return <option key={index} value={region}>{region}</option>
 
         })}
-       
+
       </select>
 
 

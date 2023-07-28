@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 .main-container {
   display: flex;
@@ -56,9 +57,11 @@
   flex-direction: column;
   overflow: hidden;
   margin-bottom: 2em;
+  
 }
 .imageClass {
   height: 10vw;
+  
 }
 .imageClass img {
   width: 100%;
@@ -72,6 +75,8 @@
   /* align-items: center; */
   padding: 2em;
   gap: 1em;
+  color: black;
+
 }
 
 .loader {
@@ -100,6 +105,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 .image {
   display: flex;

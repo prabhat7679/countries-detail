@@ -41,9 +41,8 @@ export default function DetailfindCountry({ searchedCountry }) {
                             <p>Top Level Domain : {findCountry[0].tld[0]}</p>
                             <p>Currencies : {findCountry[0].currencies == undefined ? ('') :
                                 (Object.keys(findCountry[0].currencies)[0])}</p>
-                            <p>Languages: {Object.values(findCountry[0].languages).map((language, index) => {
-                                return <span key={index}>{language + ','}</span>
-                            })}</p>
+                            <p>Languages: {Object.values(findCountry[0].languages).join(',') 
+                                }</p>
                         </div>
                     </div>
 

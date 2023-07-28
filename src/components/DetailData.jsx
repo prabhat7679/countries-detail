@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../App'
 import { useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 export default function DetailfindCountry({ searchedCountry }) {
 
-    const [darkTheme, setDarkTheme]= useContext(DarkModeContext)
+    const [darkTheme, setDarkTheme] = useContext(DarkModeContext)
+    const navigate = useNavigate()
 
     const id = useParams().id;
     // console.log(id)
@@ -17,12 +18,15 @@ export default function DetailfindCountry({ searchedCountry }) {
     })
 
     // console.log(findCountry)
+    function goBack() {
+        navigate(-1)
+    }
     return (
         <div class={darkTheme && "detailPageContainer Dark" || "detailPageContainer"}>
             <div className='countryPage' >
-                <Link to={'/'}>
-                    <button className='Back'> Back</button>
-                </Link>
+
+                <button className='Back' onClick={goBack}> Back</button>
+
             </div>
             <div className='allDetails'>
 
@@ -46,8 +50,8 @@ export default function DetailfindCountry({ searchedCountry }) {
                             <p>Top Level Domain : {findCountry[0].tld[0]}</p>
                             <p>Currencies : {findCountry[0].currencies == undefined ? ('') :
                                 (Object.keys(findCountry[0].currencies)[0])}</p>
-                            <p>Languages: {Object.values(findCountry[0].languages).join(',') 
-                                }</p>
+                            <p>Languages: {Object.values(findCountry[0].languages).join(',')
+                            }</p>
                         </div>
                     </div>
 

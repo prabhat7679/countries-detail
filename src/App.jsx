@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Countries from './components/Countries'
 import Navbar from './components/Navbar'
@@ -7,9 +7,10 @@ import Loader from './components/Loader'
 import DetailData from './components/DetailData'
 import { Route, Routes } from 'react-router-dom'
 import CountryCard from './components/CountryCard'
+export const DarkModeContext = React.createContext();
 
 function App() {
-  // const [darkTheme, setDarkTheme]=useState(true);
+  const [darkTheme, setDarkTheme] = useState();
   const [countries, setcountriesData] = useState([]);
   const [region, setRegion] = useState('');
   const [searchResult, setSearchResult] = useState('');
@@ -39,16 +40,20 @@ function App() {
       })
   }, []);
 
-  // function toggleTheme(){
-  //   setDarkTheme(prevDarkTheme => !prevDarkTheme)
-  // }
+  function toggleTheme() {
+    if (darkTheme) {
+      setDarkTheme(false)
+    } else {
+      setDarkTheme(true)
+    }
+  }
 
-  //  seperate by region 
+  //  seperate by region or find region 
   let seperateRegion = countries.filter((country) => {
     return country.region.toLowerCase().includes(region.toLowerCase());
   })
 
-  //     find subRegion form the seperate Region 
+  //     find subRegion .... form the seperate Region 
   let subRegionData = [];
 
   if (region !== '') {
@@ -65,6 +70,7 @@ function App() {
     }, {});
   }
 
+  //      find country from particular subregion 
   const dataSubRegion = seperateRegion.filter((country) => {
     return country.subregion?.toLowerCase().includes(subRegion.toLowerCase());
   })
@@ -107,20 +113,30 @@ function App() {
             <Routes>
 
               <Route path="/" element={
-                <> <Header />
-                  <Navbar
-                    setRegion={setRegion}
-                    setSearchResult={setSearchResult}
-                    setSortingOrder={setSortingOrder}
-                    subRegion={Object.keys(subRegionData)}
-                    setSubRegion={setSubRegion}
-                  />
-                  <Countries countriesData={searchedCountry} />
-                </>}>
+                <>
+                  < DarkModeContext.Provider value={[darkTheme, setDarkTheme]}>
+                    <Header toggleTheme={toggleTheme} />
+                    <Navbar
+                      setRegion={setRegion}
+                      setSearchResult={setSearchResult}
+                      setSortingOrder={setSortingOrder}
+                      subRegion={Object.keys(subRegionData)}
+                      setSubRegion={setSubRegion}
+                    />
+                    <Countries countriesData={searchedCountry} />
+                  </DarkModeContext.Provider>
+                </>
+              }>
               </Route>
 
-              <Route path='/country/:id' element={<><Header /><DetailData searchedCountry={countries} /></>}>
-
+              <Route path='/country/:id' element={
+                <>
+                  < DarkModeContext.Provider value={[darkTheme, setDarkTheme]}>
+                    <Header toggleTheme={toggleTheme} />
+                    <DetailData searchedCountry={countries} />
+                  </DarkModeContext.Provider>
+                </>
+              }>
               </Route>
 
             </Routes>)}

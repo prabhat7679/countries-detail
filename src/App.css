@@ -146,3 +146,9 @@
   width: 70px;
   margin: 10px;
 }
+
+
+.Dark{
+  color: white;
+  background-color: rgb(26, 24, 24);
+}

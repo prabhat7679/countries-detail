@@ -1,8 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import { DarkModeContext } from '../App'
+import { useContext } from 'react';
 
 export default function DetailfindCountry({ searchedCountry }) {
+
+    const [darkTheme, setDarkTheme]= useContext(DarkModeContext)
+
     const id = useParams().id;
     // console.log(id)
 
@@ -13,7 +18,7 @@ export default function DetailfindCountry({ searchedCountry }) {
 
     // console.log(findCountry)
     return (
-        <div class="detailPageContainer">
+        <div class={darkTheme && "detailPageContainer Dark" || "detailPageContainer"}>
             <div className='countryPage' >
                 <Link to={'/'}>
                     <button className='Back'> Back</button>

@@ -1,7 +1,8 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../App';
 export default function Navbar({ setRegion, setSearchResult, setSortingOrder, subRegion,setSubRegion }) {
 
+  const [darkTheme, setDarkTheme] = useContext(DarkModeContext)
   function onSearch(value) {
     setSearchResult(value)
   }
@@ -24,7 +25,7 @@ export default function Navbar({ setRegion, setSearchResult, setSortingOrder, su
 
 
   return (
-    <nav className='navbar'>
+    <nav className={darkTheme && 'navbar Dark' || 'navbar'}>
       <input className='searchBaR'
         type='text'
         placeholder='Search for a country...'

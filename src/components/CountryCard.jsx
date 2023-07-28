@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function CountryCard({ img, name, population, region, capital }) {
+function CountryCard({ value,img, name, population, region, capital}) {
+    // console.log(value)
     return (
         <div className='country-card'>
-            <div className='imageClass'>
+          <Link to={`/country/${value}`}>  <div className='imageClass'>
                 <img src={img} alt="" />
             </div>
+            </Link>
             <div className="allData">
                 <h2> Name :{name}</h2>
                 <h4>Population :{population}</h4>

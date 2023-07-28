@@ -81,3 +81,62 @@
   height: 100vh;
   font-size: 24px;
 }
+/* detail page css */
+
+.Back {
+  margin-left: 2em;
+  width: 7em;
+  margin-top: 2em;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  box-shadow: 0px 2px 3px gray;
+  border-radius: 10px;
+}
+.allDetails {
+  width: 100vw;
+  height: 70vh;
+  /* background-color: aliceblue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 1em;
+}
+.img {
+  height: 20em;
+  width: 30em;
+  border: 1px solid rgb(230, 214, 214);
+  object-fit: cover;
+}
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.nameDetails {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+}
+.borderCountries {
+  display: flex;
+  padding: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.leftPart p {
+  padding: 6px;
+}
+.rightPart p {
+  padding: 6px;
+}
+.ChangeButton {
+  height: 40px;
+  width: 70px;
+  margin: 10px;
+}

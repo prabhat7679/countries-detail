@@ -4,15 +4,19 @@ import Countries from './components/Countries'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
 import Loader from './components/Loader'
+import DetailData from './components/DetailData'
+import { Route, Routes } from 'react-router-dom'
+import CountryCard from './components/CountryCard'
 
 function App() {
+  // const [darkTheme, setDarkTheme]=useState(true);
   const [countries, setcountriesData] = useState([]);
   const [region, setRegion] = useState('');
   const [searchResult, setSearchResult] = useState('');
   const [sortingOrder, setSortingOrder] = useState('');
-  const [subregion, setSubRegion] = useState([]);
-  const [dataOfSubRegion, setDataOfSubRegion] = useState([])
-  const [error, setError] = useState('');
+  const [subRegion, setSubRegion] = useState('');
+
+  const [Error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
 
@@ -35,40 +39,35 @@ function App() {
       })
   }, []);
 
+  // function toggleTheme(){
+  //   setDarkTheme(prevDarkTheme => !prevDarkTheme)
+  // }
+
   //  seperate by region 
   let seperateRegion = countries.filter((country) => {
     return country.region.toLowerCase().includes(region.toLowerCase());
   })
 
   //     find subRegion form the seperate Region 
-  let subRegionData = seperateRegion.reduce((acc, country) => {
+  let subRegionData = [];
 
-    let findSubRegion = country.subregion;
+  if (region !== '') {
+    subRegionData = seperateRegion.reduce((acc, country) => {
 
-    if (findSubRegion in acc) {
-      acc[findSubRegion].push(country);
-    } else {
-      acc[findSubRegion] = [country];
-    }
-    return acc;
-  }, {});
+      let findSubRegion = country.subregion;
 
+      if (findSubRegion in acc) {
+        acc[findSubRegion].push(country);
+      } else {
+        acc[findSubRegion] = [country];
+      }
+      return acc;
+    }, {});
+  }
 
-  //when region change useEffect called and it will set setSubRegion
-  useEffect(() => {
-    setSubRegion(Object.keys(subRegionData));
-  }, [region])
-
-  //    country inside subregion 
-
-  let dataSubRegion = seperateRegion.filter((country) => {
-    if (country.subregion == undefined) {
-      return true;
-    } else {
-      return country.subregion.includes(dataOfSubRegion)
-    }
+  const dataSubRegion = seperateRegion.filter((country) => {
+    return country.subregion?.toLowerCase().includes(subRegion.toLowerCase());
   })
-
 
   // search bar 
   let searchedCountry = dataSubRegion.filter((country) => {
@@ -98,26 +97,36 @@ function App() {
     })
   }
 
+  // console.log(searchedCountry[0])
   return (
     <>
-
-
       <div className="main-container">
+
         {loading ? (<Loader />) :
           (
-            <>
-              {countries.length === 0 ? ('No Data Found') :
-                <><Header />
+            <Routes>
+
+              <Route path="/" element={
+                <> <Header />
                   <Navbar
                     setRegion={setRegion}
                     setSearchResult={setSearchResult}
                     setSortingOrder={setSortingOrder}
-                    subregion={subregion}
-                    setDataOfSubRegion={setDataOfSubRegion}
+                    subRegion={Object.keys(subRegionData)}
+                    setSubRegion={setSubRegion}
                   />
-                  <Countries countriesData={searchedCountry} /></>}
-            </>)}
+                  <Countries countriesData={searchedCountry} />
+                </>}>
+              </Route>
+
+              <Route path='/country/:id' element={<><Header /><DetailData searchedCountry={countries} /></>}>
+
+              </Route>
+
+            </Routes>)}
       </div>
+
+
     </>
   )
 }
